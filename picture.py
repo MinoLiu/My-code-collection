@@ -11,6 +11,9 @@ def grab_picture(self):
         r=requests.get(picture['src'])                      #get the image url
         pt = '/home/mino/Pictures/test/{0}.jpg'.format(a)   #filename
         with open(pt,'wb') as f:                            #save jpg
+        r=requests.get(picture['src'])
+        filename = '/home/mino/Pictures/test/{0}.jpg'.format(a)
+        with open(filename,'wb') as f:
             f.write(r.content)
         a=a+1
 if __name__ == "__main__":
