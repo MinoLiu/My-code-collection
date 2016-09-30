@@ -7,7 +7,7 @@ def request(web):
 
 def dir_create(r):  # 創建新目錄
     bookname=r.find_all("h2")[0].text.replace("/","")
-    dirname= '/home/mino/Picture/GTFO/'+bookname #自己的目錄
+    dirname= '/home/mino/Pictures/GTFO/'+bookname #自己的目錄
     #dirname=os.getcwd()+'/'+bookname  #其他人請註解掉上面使用這個 或者 自行修改上面目錄
     if(os.path.exists(dirname)):  #檢查目錄是否已存在
         print("目錄已存在！")  
