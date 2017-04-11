@@ -14,8 +14,8 @@ s=requests.session()
 s.post(url='http://register.dormnet.yuntech.edu.tw/login',data=data)
 r=s.get(url='http://register.dormnet.yuntech.edu.tw/NetFlow/apiFlowCheck.json')
 c=s.get(url='http://register.dormnet.yuntech.edu.tw/user-status')
-soup=BeautifulSoup(r.text,"lxml")
-check=BeautifulSoup(c.text,"lxml")
+soup=BeautifulSoup(r.text,"html.parser")
+check=BeautifulSoup(c.text,"html.parser")
 status= check.select("dd")[3].text
 apartment=check.select("dd")[1].text
 name=check.select("strong")[0].text
