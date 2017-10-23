@@ -62,7 +62,7 @@ Strategy:
 ###############################################################
 # $s4 = food.X, $s7 = food.Y, $t4 = head.X, $t5 = head.Y
 	lw $s3, bodylength
-	bge $s3, 40, Safe_mode		# ¶W¹L40¶i¤Jsafe_mode
+	bge $s3, 40, Safe_mode		# if bodylength >= 40 , branch Safe_mode
 Normal_mode:
 	bge $t4,$s4, Move_left		# foodX > headX branch move_left
 	j Move_right			# < j move_left
