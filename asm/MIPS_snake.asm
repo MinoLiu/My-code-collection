@@ -17,7 +17,7 @@
 #	$a3	input ASCII
 #	$t4	snake.head.X
 #	$t5	snake.head.Y
-#	$k1	safe_mode_move_position
+#	$v1	safe_mode_move_position
 #	$a2	ate food flag
 ##########################################################
 .data
@@ -55,7 +55,7 @@ init:
 	
 ################################################################	
 Strategy:
-	li $a0,1			#Decrease to increase difficulty; Increase to decrease difficulty
+	li $a0,10			#Decrease to increase difficulty; Increase to decrease difficulty
 	li $v0,32			#Sleep for 60 milliseconds
 	syscall
 	jal snakeXY			# get snake head coordinate
@@ -72,25 +72,25 @@ Safe_mode:
 	beq $t5, 1, setRight
 	beq $t4, 1, setUp
 setReturn:
-	beq $k1, 1, left_safe		# branch for $k1 position
-	beq $k1, 2, under_safe
-	beq $k1, 3, right_safe
-	beq $k1, 4, up_safe
+	beq $v1, 1, left_safe		# branch for $v1 position
+	beq $v1, 2, under_safe
+	beq $v1, 3, right_safe
+	beq $v1, 4, up_safe
 	j up				# when entry the safe_mode , go to touch top boundary
 setLeft:
-	li $k1, 1		# set position to left
+	li $v1, 1		# set position to left
 	li $a2, 0		# reset growup flag
 	j setReturn		# return
 setUnder:
-	li $k1, 2		# set position to left
+	li $v1, 2		# set position to left
 	li $a2, 0		# reset growup flag
 	j setReturn		# return
 setRight:
-	li $k1, 3		# set position to left
+	li $v1, 3		# set position to left
 	li $a2, 0		# reset growup flag
 	j setReturn		# return
 setUp:
-	li $k1, 4		# set position to left
+	li $v1, 4		# set position to left
 	li $a2, 0		# reset growup flag
 	j setReturn		# return
 reverse:
