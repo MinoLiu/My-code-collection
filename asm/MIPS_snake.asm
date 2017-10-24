@@ -67,9 +67,9 @@ Normal_mode:
 	bge $t4,$s4, Move_left		# foodX > headX branch move_left
 	j Move_right			# < j move_left
 Safe_mode:
-	beq $t5, 30, setLeft		# when touch boundary then reset flag and position
 	beq $t4, 30, setUnder
 	beq $t5, 1, setRight
+	beq $t5, 30, setLeft		# when touch boundary then reset flag and position
 	beq $t4, 1, setUp
 setReturn:
 	beq $v1, 1, left_safe		# branch for $v1 position
@@ -239,6 +239,7 @@ under_safe:
 	bnez $a2, us2			# if $a2 == 1 , mean already ate food branch us2
 	seq $t0, $t5,$s7		# if headY == foodY, $t0 = 1
 	beqz $t0, us2			# $t0 == 0, branch us2
+	beq $s4, $t4, us2		# if headX == foodX, branch us2 cause eat food
 	ble $s4, 15, us2		# foodX <= 15 branch us2
 	j left				# go to eat
 us2:
@@ -258,6 +259,7 @@ right_safe:
 	bnez $a2,rs2			# if $a2 == 1 , mean already ate food branch rs2
 	seq $t0, $t4, $s4		# if headX == foodX, $t0 = 1
 	beqz $t0, rs2			# $t0 == 0, branch rs2
+	beq $s7, $t5, rs2		# if headY == foodY, branch rs2 cause eat food
 	bgt $s7, 15, rs2		# foodY > 15 branch rs2
 	j under				# go to eat
 rs2:
@@ -277,6 +279,7 @@ left_safe:
 	bnez $a2, ls2			# if $a2 == 1 , mean already ate food branch ls2
 	seq $t0, $t4, $s4		# if headX == foodX, $t0 = 1
 	beqz $t0, ls2			# $t0 == 0, branch ls2
+	beq $s7, $t5, ls2		# if headY == foodY, branch ls2 cause eat food
 	ble $s7, 15, ls2		# if foodY <= 15, branch ls2
 	j up				# go to eat
 ls2:
@@ -296,6 +299,7 @@ up_safe:
 	bnez $a2, ups2			# if $a2 == 1 , mean already ate food branch ups2
 	seq $t0, $t5,$s7		# if headY == foodY, $t0 = 1
 	beqz $t0, ups2			# if $t0 == 0, branch ups2
+	beq $s4, $t4, ups2		# if headX == foodX, branch ups2 cause eat food
 	bgt $s4, 15, ups2		# if headX > 15, branch ups2
 	j right				# go to eat
 ups2:
