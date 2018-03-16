@@ -397,7 +397,7 @@ DWORD __stdcall HelperThread(void* pParam)
 			//如果用戶端的連接還存在，則斷開連接，執行緒退出
 			if (!(pClient->IsConning()))
 			{
-				iter = clientlist.erase(iter); //將刪除
+				iter = clientlist.erase(iter);  //將刪除
 				isErase = true; 				//設定Erase flag
 			}
 			else{
@@ -411,6 +411,7 @@ DWORD __stdcall HelperThread(void* pParam)
 			{
 				CClient *pTemp = (CClient*)*iter;
 				pTemp->GetClientList(clientlist);
+				delete pTemp;
 				++iter;
 			}
 		}
