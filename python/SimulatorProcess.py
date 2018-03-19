@@ -29,7 +29,7 @@ class Process:
         self.new_time = 1
         with open(str(file), 'r') as f:
             _, _limit = f.readline().strip().split(' ')
-            self.limit = _limit
+            self.limit = int(_limit)
             _name, _times = f.readline().strip().split(' ')
             self.running = instruction(_name, _times)
             for line in f.readlines():
@@ -45,7 +45,7 @@ class Process:
             self.waiting = None
         if _input == '':
             poped = False
-            if self.new_time >= 5 or self.running == None or self.running.times == 1:
+            if self.new_time >= self.limit or self.running == None or self.running.times == 1:
                 self.new_time = 0
                 if self.running and self.running.times > 1:
                     self.running.minus()
